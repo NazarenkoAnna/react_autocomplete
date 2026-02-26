@@ -14,29 +14,29 @@ export const PeopleAutocomplete: React.FC<Props> = ({
 }) => {
   const [query, setQuery] = useState('');
   const [isActive, setIsActive] = useState(false);
-  const [lasrQuery, setLAstQuery] = useState('');
+  const [lastQuery, setLastQuery] = useState('');
   const field = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     field.current?.focus();
-  });
+  }, []);
 
   useEffect(() => {
     const timerId = window.setTimeout(() => {
-      const normalaizeQuery = query.trim();
+      const normalizeQuery = query.trim();
 
-      if (normalaizeQuery !== lasrQuery) {
-        setLAstQuery(normalaizeQuery);
+      if (normalizeQuery !== lastQuery) {
+        setLastQuery(normalizeQuery);
       }
     }, delay);
 
     return () => {
       clearTimeout(timerId);
     };
-  }, [query, delay, lasrQuery]);
+  }, [query, delay, lastQuery]);
 
   const filteredPeople = people.filter(person =>
-    person.name.toLowerCase().includes(lasrQuery.toLowerCase()),
+    person.name.toLowerCase().includes(lastQuery.toLowerCase()),
   );
 
   return (
@@ -87,7 +87,7 @@ export const PeopleAutocomplete: React.FC<Props> = ({
         )}
       </div>
 
-      {filteredPeople.length === 0 && lasrQuery.length !== 0 && (
+      {filteredPeople.length === 0 && lastQuery.length !== 0 && isActive &&(
         <div
           className="
             notification
