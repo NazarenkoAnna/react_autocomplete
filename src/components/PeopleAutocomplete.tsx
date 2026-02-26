@@ -33,7 +33,7 @@ export const PeopleAutocomplete: React.FC<Props> = ({
     return () => {
       clearTimeout(timerId);
     };
-  }, [query, delay, lastQuery]);
+  }, [query, delay]);
 
   const filteredPeople = people.filter(person =>
     person.name.toLowerCase().includes(lastQuery.toLowerCase()),
@@ -87,7 +87,7 @@ export const PeopleAutocomplete: React.FC<Props> = ({
         )}
       </div>
 
-      {filteredPeople.length === 0 && lastQuery.length !== 0 && isActive &&(
+      {filteredPeople.length === 0 && lastQuery.length !== 0 && isActive && (
         <div
           className="
             notification
